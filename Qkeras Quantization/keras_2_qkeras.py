@@ -11,6 +11,7 @@ import netron
 
 # use by function converter
 # make q_dict configure qkeras quantize
+# i don't kown why but you need quantized_bits(3,0,1) to have a 4-bit wide quantization JUST FOR conv1D
 # bit_wide_list : quantization distribution
 # absmax_weight_list : list of absmax weights of each layer (exist Qkeras_8bit_model)
 # return : q_dict
@@ -19,33 +20,33 @@ def make_q_dict(bit_wide_list=[8, 8, 8, 8, 8, 8, 8], absmax_weight_list=[]):
         if len(set(bit_wide_list)) == 1 and bit_wide_list[0]==8:
             q_dict = {
                 "conv1": {
-                    "kernel_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0]),
-                    "bias_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0])
+                    "kernel_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0] - 1),
+                    "bias_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0] - 1)
                 },
 
                 "conv2": {
-                    "kernel_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0]),
-                    "bias_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0])
+                    "kernel_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0] - 1),
+                    "bias_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0] - 1)
                 },
 
                 "conv3": {
-                    "kernel_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0]),
-                    "bias_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0])
+                    "kernel_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0] - 1),
+                    "bias_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0] - 1)
                 },
 
                 "conv4": {
-                    "kernel_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0]),
-                    "bias_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0])
+                    "kernel_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0] - 1),
+                    "bias_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0] - 1)
                 },
 
                 "conv5": {
-                    "kernel_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0]),
-                    "bias_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0])
+                    "kernel_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0] - 1),
+                    "bias_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0] - 1)
                 },
 
                 "conv6": {
-                    "kernel_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0]),
-                    "bias_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0])
+                    "kernel_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0] - 1),
+                    "bias_quantizer": "quantized_bits({},0,1)".format(bit_wide_list[0] - 1)
                 },
 
                 "Dense1": {
@@ -58,33 +59,33 @@ def make_q_dict(bit_wide_list=[8, 8, 8, 8, 8, 8, 8], absmax_weight_list=[]):
     else:
         q_dict = {
             "conv1": {
-                "kernel_quantizer": "quantized_bits({},0,1,{})".format(bit_wide_list[0], absmax_weight_list[0]),
-                "bias_quantizer": "quantized_bits({},0,1,1)".format(bit_wide_list[0])
+                "kernel_quantizer": "quantized_bits({},0,1,{})".format(bit_wide_list[0] - 1, absmax_weight_list[0]),
+                "bias_quantizer": "quantized_bits({},0,1,1)".format(bit_wide_list[0] - 1)
             },
 
             "conv2": {
-                "kernel_quantizer": "quantized_bits({},0,1,{})".format(bit_wide_list[1], absmax_weight_list[1]),
-                "bias_quantizer": "quantized_bits({},0,1,1)".format(bit_wide_list[1])
+                "kernel_quantizer": "quantized_bits({},0,1,{})".format(bit_wide_list[1] - 1, absmax_weight_list[1]),
+                "bias_quantizer": "quantized_bits({},0,1,1)".format(bit_wide_list[1] - 1)
             },
 
             "conv3": {
-                "kernel_quantizer": "quantized_bits({},0,1,{})".format(bit_wide_list[2], absmax_weight_list[2]),
-                "bias_quantizer": "quantized_bits({},0,1,1)".format(bit_wide_list[2])
+                "kernel_quantizer": "quantized_bits({},0,1,{})".format(bit_wide_list[2] - 1, absmax_weight_list[2]),
+                "bias_quantizer": "quantized_bits({},0,1,1)".format(bit_wide_list[2] - 1)
             },
 
             "conv4": {
-                "kernel_quantizer": "quantized_bits({},0,1,{})".format(bit_wide_list[3], absmax_weight_list[3]),
-                "bias_quantizer": "quantized_bits({},0,1,1)".format(bit_wide_list[3])
+                "kernel_quantizer": "quantized_bits({},0,1,{})".format(bit_wide_list[3] - 1, absmax_weight_list[3]),
+                "bias_quantizer": "quantized_bits({},0,1,1)".format(bit_wide_list[3] - 1)
             },
 
             "conv5": {
-                "kernel_quantizer": "quantized_bits({},0,1,{})".format(bit_wide_list[4], absmax_weight_list[4]),
-                "bias_quantizer": "quantized_bits({},0,1,1)".format(bit_wide_list[4])
+                "kernel_quantizer": "quantized_bits({},0,1,{})".format(bit_wide_list[4] - 1, absmax_weight_list[4]),
+                "bias_quantizer": "quantized_bits({},0,1,1)".format(bit_wide_list[4] - 1)
             },
 
             "conv6": {
-                "kernel_quantizer": "quantized_bits({},0,1,{})".format(bit_wide_list[5], absmax_weight_list[5]),
-                "bias_quantizer": "quantized_bits({},0,1,1)".format(bit_wide_list[5])
+                "kernel_quantizer": "quantized_bits({},0,1,{})".format(bit_wide_list[5] - 1, absmax_weight_list[5]),
+                "bias_quantizer": "quantized_bits({},0,1,1)".format(bit_wide_list[5] - 1)
             },
 
             "Dense1": {

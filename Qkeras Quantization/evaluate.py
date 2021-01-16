@@ -29,8 +29,11 @@ def correct_layer(f, MINUNIT):
     del f  # delete old weight first
     for index, element in np.ndenumerate(weight):
         if element % MINUNIT != 0:
-            # eg. 0.0010 1101 1 ==> 0.0010 1101
-            weight[index] = element // MINUNIT * MINUNIT
+            # eg. 0.124999999 ==> 0.125
+            if (element - element // MINUNIT * MINUNIT) >= MINUNIT / 2:
+                weight[index] = (element // MINUNIT + 1) * MINUNIT
+            else:
+                weight[index] = element // MINUNIT * MINUNIT
             # print(element, weight[index])
     f = weight  # write new weight
 

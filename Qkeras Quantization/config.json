@@ -1,5 +1,13 @@
 {
-    "quantization_distribution": [8,8,8,8,8,8,8],
+  "quantization_distribution": [
+    6,
+    4,
+    6,
+    6,
+    4,
+    4,
+    4
+  ],
 
     "model_dir": "../model/FP32_model.hdf5",
     "qkeras_8bit_model_dir": "../model/Qkeras_8bit_model.h5",
@@ -15,7 +23,7 @@
     "num_categories": 17,
 
     "shuffle": true,
-    "recorrect": false,
+  "recorrect": true,
 
 
     "train": "./train_32.json",
