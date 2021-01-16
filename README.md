@@ -35,10 +35,13 @@ quantize FP32 model to INT8 model with tensorflow lite
 * save quantization model(.tflite) in model
 env : **TFLite
 
+
 package       |version
 --------------|-------------------------
 tf-nightly-cpu|2.3.0
 tensorflow-model-optimization|0.5.0
+
+<font color="#dd0000">***TODO***</font> HOW to use? 
      
 ###2.3 Qkeras Quantization
 quantize FP32 model to low bit quantization model with Qkeras
