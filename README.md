@@ -30,6 +30,7 @@ env : **TF23**
 package|version
 ---|---
 tensorflow|2.3.0
+
 we don't use tf 2.4.0 because our CUDA==10.1 CUDNN==7.6
 
   
@@ -58,6 +59,7 @@ package|version
 ---|---
 tensorflow|2.3.0
 Qkeraas|0.8.0
+
 install and konw more about Qkeras : [Qkeras](https://github.com/google/qkeras)
 
 run `pip install .`in download folder and ***NOTE Qkeras install requirements!***
