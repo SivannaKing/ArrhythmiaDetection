@@ -5,10 +5,13 @@ from __future__ import absolute_import
 import argparse
 import json
 from tensorflow import keras
+
 import os
 import numpy as np
 import h5py
 import warnings
+import json
+import time
 
 import network
 import load
@@ -145,7 +148,8 @@ def getsize(qmodel, bit_wide_list):
 # record in log file
 def evaluate(dev_x, dev_y, params):
     # read config from config.json
-    quantization_distribution = params.get("quantization_distribution")
+    quantization_distribution = list(params.get("quantization_distribution"))
+    quantization_distribution = list(map(int, quantization_distribution))
     params.update({"input_shape": [3600, 1]})
     batch_size = params.get("batch_size", 32)
 
@@ -153,9 +157,9 @@ def evaluate(dev_x, dev_y, params):
     model_path = params.get("model_dir")
     # two different mode : correct or not correct wrong quantization bit wide
     if params.get("recorrect"):
-        qmodel_8bit_path = params.get("qkeras_8bit_model_dir-rc")
-        qmodel_path = params.get("qkeras_model_dir-rc")
-        log_path = params.get("log_file_dir-rc")
+        qmodel_8bit_path = params.get("qkeras_8bit_model_dir")[:-3] + "-rc.h5"
+        qmodel_path = params.get("qkeras_model_dir")[:-3] + "-rc.h5"
+        log_path = params.get("log_file_dir") + "-rc"
     else:
         qmodel_8bit_path = params.get("qkeras_8bit_model_dir")
         qmodel_path = params.get("qkeras_model_dir")
@@ -200,19 +204,25 @@ def evaluate(dev_x, dev_y, params):
     print('Qkeras model size:', getsize(qmodel, quantization_distribution), 'kB')
 
     # save score in log file
+
     if not os.path.exists(log_path):
+        with open('./config.json', 'r') as j:
+            config_setting = json.load(j)
         with open(log_path, 'a') as f:
-            f.write('quantization_distribution' + '\t'
+            f.write(str(time.asctime(time.localtime(time.time()))) + '\n')
+            for key, value in config_setting.items():
+                f.write(str(key) + ':' + str(value) + '\n')
+            f.write('\nquantization_distribution' + '\t'
                     + 'FP32 acc' + '\t'
                     + 'qkeras model acc' + '\t'
                     + 'FP32 acc - qkeras model acc' + '\t'
                     + 'size(kB)' + '\n')
     with open(log_path, 'a') as f:
-        f.write(str(quantization_distribution) + '\t\t  '
+        f.write(str(quantization_distribution) + '\t\t\t'
                 + str(round(dev_score * 100, 2)) + '\t\t'
                 + str(round(q_dev_score * 100, 2)) + '\t\t\t'
                 + str(round((dev_score - q_dev_score) * 100, 2)) + '\t\t\t\t'
-                + str(getsize(qmodel, quantization_distribution)) + '\n')
+                + str(round(getsize(qmodel, quantization_distribution), 2)) + '\t\n')
 
 
 if __name__ == '__main__':

@@ -102,7 +102,11 @@ def make_q_dict(bit_wide_list=[8, 8, 8, 8, 8, 8, 8], absmax_weight_list=[]):
 # AbsmaxWeightList : list of absmax weights of each layer (exist Qkeras_8bit_model)
 def converter(model_path, qmodel_path, BitWideList, AbsmaxWeightList):
     model = keras.models.load_model(model_path)
-    qmodel = model_quantize(model, make_q_dict(BitWideList, AbsmaxWeightList), max(BitWideList), transfer_weights=True)
+    print('quantizing...')
+    qmodel = model_quantize(model,
+                            make_q_dict(BitWideList, AbsmaxWeightList),
+                            max(BitWideList),
+                            transfer_weights=True)
     # qmodel.summary()
     qkeras.utils.model_save_quantized_weights(qmodel, qmodel_path) # only save weight
     # netron.start(qmodel_path)

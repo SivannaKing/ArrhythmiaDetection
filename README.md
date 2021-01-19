@@ -8,15 +8,15 @@ This project aims to achieve arrhymia detection.
 
 
 ## 2 File Structure
-base path|sub path                 |folder
----------|-------------------------|----
-ECG2     |Train                    |saved
--        |TFLite Quantization
--        |Qkeras Quantization
--        |model
--        |MLII
--        |Record
--        |layer_wise_quantization
+base path|sub path|folder
+---|---|---
+ECG2|Train|saved
+\|TFLite Quantization
+\|Qkeras Quantization
+\|model
+\|MLII
+\|Record
+\|layer_wise_quantization
  
 ###2.1 Train
 train FP32 model
@@ -24,8 +24,8 @@ train FP32 model
 
 env : **TF23**
 
-package   |version
-----------|-------------------------
+package|version
+---|---
 tensorflow|2.3.0
 we don't use tf 2.4.0 because our CUDA==10.1 CUDNN==7.6
       
@@ -36,8 +36,8 @@ quantize FP32 model to INT8 model with tensorflow lite
 env : **TFLite
 
 
-package       |version
---------------|-------------------------
+package|version
+---|---
 tf-nightly-cpu|2.3.0
 tensorflow-model-optimization|0.5.0
 
@@ -49,10 +49,10 @@ quantize FP32 model to low bit quantization model with Qkeras
 * need FP32_model.hdf5 in '../model'
 env: Qkeras
 
-package       |version
---------------|-------------------------
-     tensorflow|2.3.0
-     Qkeraas|0.8.0
+package|version
+---|---
+tensorflow|2.3.0
+Qkeraas|0.8.0
 install and konw more about Qkeras : [Qkeras](https://github.com/google/qkeras)
 
 run `pip install .`in download folder and ***NOTE Qkeras install requirements!***
