@@ -19,8 +19,9 @@ ECG2|Train|saved
 -->|MLII
 -->|Record
 -->|layer_wise_quantization
- 
-##2.1 Train
+
+
+### 2.1 Train
 train FP32 model
 * save model(.hdf5) in '../Train/saved'
 
@@ -30,8 +31,9 @@ package|version
 ---|---
 tensorflow|2.3.0
 we don't use tf 2.4.0 because our CUDA==10.1 CUDNN==7.6
-      
-##2.2 TFLite Quantization
+
+  
+### 2.2 TFLite Quantization
 quantize FP32 model to INT8 model with tensorflow lite
 * find best model in Train/saved and copy to model
 * save quantization model(.tflite) in model
@@ -43,9 +45,10 @@ package|version
 tf-nightly-cpu|2.3.0
 tensorflow-model-optimization|0.5.0
 
-<font color="#dd0000">***TODO***</font> HOW to use? 
-     
-##2.3 Qkeras Quantization
+***TODO*** HOW to use? 
+
+
+### 2.3 Qkeras Quantization
 quantize FP32 model to low bit quantization model with Qkeras
 * save quantization model(.h5) and quantization log in model
 * need FP32_model.hdf5 in '../model'
@@ -59,15 +62,17 @@ install and konw more about Qkeras : [Qkeras](https://github.com/google/qkeras)
 
 run `pip install .`in download folder and ***NOTE Qkeras install requirements!***
 
-##2.4 model
-save model and quantized model
 
+### 2.4 model
+save model and quantized model
 * used by 2 project  Qkeras Quantization and TFLite Quantization
 
-##2.5 Record
+
+### 2.5 Record
 save experiment included log; quantized model; quantization distribution
 
-##2.6 MLII
+
+### 2.6 MLII
 MIT-BIH Arrhythmia Dataset
 * 17 Classes
 * 10s 360Hz
@@ -75,6 +80,7 @@ MIT-BIH Arrhythmia Dataset
 
 ***TODO***
 How to get dataset ? [MIT-BIH 17 Classses]()
- 
-##2.7 layer_wise_quantization
+
+
+### 2.7 layer_wise_quantization
 Lzq project
